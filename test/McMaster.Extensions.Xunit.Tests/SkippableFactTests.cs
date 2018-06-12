@@ -37,7 +37,7 @@ namespace McMaster.Extensions.Xunit
         }
 #elif NET461
         [SkippableFact]
-        [SkipOnRuntimes(Runtimes.CoreCLR)]
+        [SkipOnRuntimes(Runtimes.NETCore)]
         public void ThisTestMustRunOnCLR()
         {
             Asserter.TestRan = true;

@@ -93,7 +93,7 @@ namespace McMaster.Extensions.Xunit
 
 #elif NET461
         [SkippableTheory]
-        [SkipOnRuntimes(Runtimes.CoreCLR)]
+        [SkipOnRuntimes(Runtimes.NETCore)]
         [MemberData(nameof(GetInts))]
         public void ThisTestMustRunOnCLR(int value)
         {
