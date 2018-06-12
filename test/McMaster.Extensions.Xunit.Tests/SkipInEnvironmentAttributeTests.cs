@@ -1,14 +1,15 @@
 ﻿// Copyright (c) Nate McMaster.
 // Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
 
+using McMaster.Extensions.Xunit.Internal;
 using Xunit;
 
 namespace McMaster.Extensions.Xunit
 {
-    public class EnvironmentVariableSkipConditionTest
+    public class SkipInEnvironmentAttributeTests
     {
         private readonly string _skipReason = "Test skipped on environment variable with name '{0}' and value '{1}'" +
-            $" for the '{nameof(SkipInEnvironmentAttribute.SkipOnMatch)}' value of '{{2}}'.";
+                                              $" for the '{nameof(SkipInEnvironmentAttribute.SkipOnMatch)}' value of '{{2}}'.";
 
         [Theory]
         [InlineData("false")]
@@ -51,25 +52,6 @@ namespace McMaster.Extensions.Xunit
                 attribute.SkipReason);
         }
 
-        [Fact]
-        public void IsMet_DoesSuccessfulMatch_OnNull()
-        {
-            // Arrange
-            var attribute = new SkipInEnvironmentAttribute(
-                new TestEnvironmentVariable(null),
-                "Run",
-                "true", null); // skip the test when the variable 'Run' is explicitly set to 'true' or is null (default)
-
-            // Act
-            var isMet = attribute.IsMet;
-
-            // Assert
-            Assert.True(isMet);
-            Assert.Equal(
-                string.Format(_skipReason, "Run", "(null)", attribute.SkipOnMatch),
-                attribute.SkipReason);
-        }
-
         [Theory]
         [InlineData("false")]
         [InlineData("")]
@@ -87,22 +69,6 @@ namespace McMaster.Extensions.Xunit
 
             // Assert
             Assert.True(isMet);
-        }
-
-        [Fact]
-        public void IsMet_DoesNotMatch_OnMultipleSkipValues()
-        {
-            // Arrange
-            var attribute = new SkipInEnvironmentAttribute(
-                new TestEnvironmentVariable("100"),
-                "Build",
-                "125", "126");
-
-            // Act
-            var isMet = attribute.IsMet;
-
-            // Assert
-            Assert.False(isMet);
         }
 
         [Theory]
@@ -128,6 +94,37 @@ namespace McMaster.Extensions.Xunit
             Assert.True(isMet);
         }
 
+        private struct TestEnvironmentVariable : IEnvironmentVariable
+        {
+            public TestEnvironmentVariable(string value)
+            {
+                Value = value;
+            }
+
+            public string Value { get; }
+
+            public string Get(string name)
+            {
+                return Value;
+            }
+        }
+
+        [Fact]
+        public void IsMet_DoesNotMatch_OnMultipleSkipValues()
+        {
+            // Arrange
+            var attribute = new SkipInEnvironmentAttribute(
+                new TestEnvironmentVariable("100"),
+                "Build",
+                "125", "126");
+
+            // Act
+            var isMet = attribute.IsMet;
+
+            // Assert
+            Assert.False(isMet);
+        }
+
         [Fact]
         public void IsMet_DoesNotMatch_WhenSkipOnMatchIsFalse()
         {
@@ -148,19 +145,23 @@ namespace McMaster.Extensions.Xunit
             Assert.False(isMet);
         }
 
-        private struct TestEnvironmentVariable : IEnvironmentVariable
+        [Fact]
+        public void IsMet_DoesSuccessfulMatch_OnNull()
         {
-            public TestEnvironmentVariable(string value)
-            {
-                Value = value;
-            }
+            // Arrange
+            var attribute = new SkipInEnvironmentAttribute(
+                new TestEnvironmentVariable(null),
+                "Run",
+                "true", null); // skip the test when the variable 'Run' is explicitly set to 'true' or is null (default)
 
-            public string Value { get; private set; }
+            // Act
+            var isMet = attribute.IsMet;
 
-            public string Get(string name)
-            {
-                return Value;
-            }
+            // Assert
+            Assert.True(isMet);
+            Assert.Equal(
+                string.Format(_skipReason, "Run", "(null)", attribute.SkipOnMatch),
+                attribute.SkipReason);
         }
     }
 }

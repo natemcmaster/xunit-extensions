@@ -6,24 +6,28 @@ using System;
 namespace McMaster.Extensions.Xunit
 {
     /// <summary>
-    /// Operating systems
+    /// Represents various .NET Framework runtimes
     /// </summary>
     [Flags]
-    public enum OperatingSystems
+    public enum Runtimes
     {
         /// <summary>
-        /// Linux
+        /// Represents no runtime in particular.
         /// </summary>
-        Linux = 1,
-
+        None = 0,
         /// <summary>
-        /// macOS
+        /// Mono
         /// </summary>
-        MacOS = 2,
-
+        Mono = 1 << 0,
+        
         /// <summary>
-        /// Windows
+        /// .NET Framework
         /// </summary>
-        Windows = 4,
+        NETFramework = 1 << 1,
+        
+        /// <summary>
+        /// .NET Core
+        /// </summary>
+        NETCore = 1 << 2,
     }
 }

@@ -10,7 +10,7 @@ namespace McMaster.Extensions.Xunit
     public class SkipOnOperatingSystemsAttributeTests
     {
         [SkippableFact]
-        [SkipOnOperatingSystems(OperatingSystems.Linux)]
+        [SkipOnOS(OS.Linux)]
         public void TestSkipLinux()
         {
             Assert.False(
@@ -19,7 +19,7 @@ namespace McMaster.Extensions.Xunit
         }
 
         [SkippableFact]
-        [SkipOnOperatingSystems(OperatingSystems.MacOS)]
+        [SkipOnOS(OS.MacOS)]
         public void TestSkipMacOSX()
         {
             Assert.False(
@@ -28,7 +28,7 @@ namespace McMaster.Extensions.Xunit
         }
 
         [SkippableFact]
-        [SkipOnOperatingSystems(OperatingSystems.Windows, WindowsVersions.Win7, WindowsVersions.Win2008R2)]
+        [SkipOnOS(OS.Windows, WindowsVersions.Win7, WindowsVersions.Win2008R2)]
         public void RunTest_DoesNotRunOnWin7OrWin2008R2()
         {
             Assert.False(
@@ -38,7 +38,7 @@ namespace McMaster.Extensions.Xunit
         }
 
         [SkippableFact]
-        [SkipOnOperatingSystems(OperatingSystems.Windows)]
+        [SkipOnOS(OS.Windows)]
         public void TestSkipWindows()
         {
             Assert.False(
@@ -47,7 +47,7 @@ namespace McMaster.Extensions.Xunit
         }
 
         [SkippableFact]
-        [SkipOnOperatingSystems(OperatingSystems.Linux | OperatingSystems.MacOS)]
+        [SkipOnOS(OS.Linux | OS.MacOS)]
         public void TestSkipLinuxAndMacOSX()
         {
             Assert.False(
@@ -59,7 +59,7 @@ namespace McMaster.Extensions.Xunit
         }
 
         [SkippableTheory]
-        [SkipOnOperatingSystems(OperatingSystems.Linux)]
+        [SkipOnOS(OS.Linux)]
         [InlineData(1)]
         public void TestTheorySkipLinux(int arg)
         {
@@ -69,7 +69,7 @@ namespace McMaster.Extensions.Xunit
         }
 
         [SkippableTheory]
-        [SkipOnOperatingSystems(OperatingSystems.MacOS)]
+        [SkipOnOS(OS.MacOS)]
         [InlineData(1)]
         public void TestTheorySkipMacOS(int arg)
         {
@@ -79,7 +79,7 @@ namespace McMaster.Extensions.Xunit
         }
 
         [SkippableTheory]
-        [SkipOnOperatingSystems(OperatingSystems.Windows)]
+        [SkipOnOS(OS.Windows)]
         [InlineData(1)]
         public void TestTheorySkipWindows(int arg)
         {
@@ -89,7 +89,7 @@ namespace McMaster.Extensions.Xunit
         }
 
         [SkippableTheory]
-        [SkipOnOperatingSystems(OperatingSystems.Linux | OperatingSystems.MacOS)]
+        [SkipOnOS(OS.Linux | OS.MacOS)]
         [InlineData(1)]
         public void TestTheorySkipLinuxAndMacOSX(int arg)
         {
@@ -102,7 +102,7 @@ namespace McMaster.Extensions.Xunit
         }
     }
 
-    [SkipOnOperatingSystems(OperatingSystems.Windows)]
+    [SkipOnOS(OS.Windows)]
     public class OSSkipConditionClassTest
     {
         [SkippableFact]

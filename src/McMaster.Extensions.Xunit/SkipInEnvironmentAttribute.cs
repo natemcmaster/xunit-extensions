@@ -3,23 +3,23 @@
 
 using System;
 using System.Linq;
-using McMaster.Extensions.Xunit;
+using McMaster.Extensions.Xunit.Internal;
 
-namespace Xunit
+namespace McMaster.Extensions.Xunit
 {
     /// <summary>
-    /// Skips a test when the value of an environment variable matches any of the supplied values.
+    ///     Skips a test when the value of an environment variable matches any of the supplied values.
     /// </summary>
     [AttributeUsage(AttributeTargets.Method | AttributeTargets.Class | AttributeTargets.Assembly, AllowMultiple = true)]
     public class SkipInEnvironmentAttribute : Attribute, ITestCondition
     {
-        private readonly string _variableName;
-        private readonly string[] _values;
-        private string _currentValue;
         private readonly IEnvironmentVariable _environmentVariable;
+        private readonly string[] _values;
+        private readonly string _variableName;
+        private string _currentValue;
 
         /// <summary>
-        /// Creates a new instance of <see cref="SkipInEnvironmentAttribute"/>.
+        ///     Creates a new instance of <see cref="SkipInEnvironmentAttribute" />.
         /// </summary>
         /// <param name="variableName">Name of the environment variable.</param>
         /// <param name="values">Value(s) of the environment variable to match for the test to be skipped</param>
@@ -40,7 +40,7 @@ namespace Xunit
         }
 
         /// <summary>
-        /// Skips the test only if the value of the variable matches any of the supplied values. Default is <c>True</c>.
+        ///     Skips the test only if the value of the variable matches any of the supplied values. Default is <c>True</c>.
         /// </summary>
         public bool SkipOnMatch { get; set; } = true;
 
@@ -50,16 +50,11 @@ namespace Xunit
             get
             {
                 _currentValue = _environmentVariable.Get(_variableName);
-                var hasMatched = _values.Any(value => string.Compare(value, _currentValue, ignoreCase: true) == 0);
+                var hasMatched = _values.Any(value => string.Compare(value, _currentValue, true) == 0);
 
                 if (SkipOnMatch)
-                {
                     return hasMatched;
-                }
-                else
-                {
-                    return !hasMatched;
-                }
+                return !hasMatched;
             }
         }
 
@@ -70,7 +65,7 @@ namespace Xunit
             {
                 var value = _currentValue == null ? "(null)" : _currentValue;
                 return $"Test skipped on environment variable with name '{_variableName}' and value '{value}' " +
-                    $"for the '{nameof(SkipOnMatch)}' value of '{SkipOnMatch}'.";
+                       $"for the '{nameof(SkipOnMatch)}' value of '{SkipOnMatch}'.";
             }
         }
 

@@ -5,7 +5,7 @@ using System.Collections.Generic;
 using Xunit.Abstractions;
 using Xunit.Sdk;
 
-namespace McMaster.Extensions.Xunit
+namespace McMaster.Extensions.Xunit.Internal
 {
     internal class SkippableTheoryDiscoverer : TheoryDiscoverer
     {
@@ -14,15 +14,22 @@ namespace McMaster.Extensions.Xunit
         {
         }
 
-        protected override IEnumerable<IXunitTestCase> CreateTestCasesForTheory(ITestFrameworkDiscoveryOptions discoveryOptions, ITestMethod testMethod, IAttributeInfo theoryAttribute)
+        protected override IEnumerable<IXunitTestCase> CreateTestCasesForTheory(
+            ITestFrameworkDiscoveryOptions discoveryOptions, ITestMethod testMethod, IAttributeInfo theoryAttribute)
         {
             var skipReason = testMethod.EvaluateSkipConditions();
             return skipReason != null
-               ? new[] { new SkippedTestCase(skipReason, DiagnosticMessageSink, discoveryOptions.MethodDisplayOrDefault(), testMethod) }
-               : base.CreateTestCasesForTheory(discoveryOptions, testMethod, theoryAttribute);
+                ? new[]
+                {
+                    new SkippedTestCase(skipReason, DiagnosticMessageSink, discoveryOptions.MethodDisplayOrDefault(),
+                        testMethod)
+                }
+                : base.CreateTestCasesForTheory(discoveryOptions, testMethod, theoryAttribute);
         }
 
-        protected override IEnumerable<IXunitTestCase> CreateTestCasesForDataRow(ITestFrameworkDiscoveryOptions discoveryOptions, ITestMethod testMethod, IAttributeInfo theoryAttribute, object[] dataRow)
+        protected override IEnumerable<IXunitTestCase> CreateTestCasesForDataRow(
+            ITestFrameworkDiscoveryOptions discoveryOptions, ITestMethod testMethod, IAttributeInfo theoryAttribute,
+            object[] dataRow)
         {
             var skipReason = testMethod.EvaluateSkipConditions();
             if (skipReason == null && dataRow?.Length > 0)
@@ -33,14 +40,12 @@ namespace McMaster.Extensions.Xunit
                     var type = obj.GetType();
                     var property = type.GetProperty("Skip");
                     if (property != null && property.PropertyType.Equals(typeof(string)))
-                    {
                         skipReason = property.GetValue(obj) as string;
-                    }
                 }
             }
 
-            return skipReason != null ?
-                base.CreateTestCasesForSkippedDataRow(discoveryOptions, testMethod, theoryAttribute, dataRow, skipReason)
+            return skipReason != null
+                ? CreateTestCasesForSkippedDataRow(discoveryOptions, testMethod, theoryAttribute, dataRow, skipReason)
                 : base.CreateTestCasesForDataRow(discoveryOptions, testMethod, theoryAttribute, dataRow);
         }
     }

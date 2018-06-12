@@ -8,8 +8,8 @@ namespace McMaster.Extensions.Xunit
     public class TestPlatformHelperTest
     {
         [SkippableFact]
-        [SkipOnOperatingSystems(OperatingSystems.MacOS)]
-        [SkipOnOperatingSystems(OperatingSystems.Windows)]
+        [SkipOnOS(OS.MacOS)]
+        [SkipOnOS(OS.Windows)]
         public void IsLinux_TrueOnLinux()
         {
             Assert.True(TestPlatformHelper.IsLinux);
@@ -18,8 +18,8 @@ namespace McMaster.Extensions.Xunit
         }
 
         [SkippableFact]
-        [SkipOnOperatingSystems(OperatingSystems.Linux)]
-        [SkipOnOperatingSystems(OperatingSystems.Windows)]
+        [SkipOnOS(OS.Linux)]
+        [SkipOnOS(OS.Windows)]
         public void IsMac_TrueOnMac()
         {
             Assert.False(TestPlatformHelper.IsLinux);
@@ -28,8 +28,8 @@ namespace McMaster.Extensions.Xunit
         }
 
         [SkippableFact]
-        [SkipOnOperatingSystems(OperatingSystems.Linux)]
-        [SkipOnOperatingSystems(OperatingSystems.MacOS)]
+        [SkipOnOS(OS.Linux)]
+        [SkipOnOS(OS.MacOS)]
         public void IsWindows_TrueOnWindows()
         {
             Assert.False(TestPlatformHelper.IsLinux);
@@ -38,7 +38,7 @@ namespace McMaster.Extensions.Xunit
         }
 
         [SkippableFact]
-        [SkipOnRuntimes(Runtimes.CLR | Runtimes.CoreCLR | Runtimes.None)]
+        [SkipOnRuntimes(Runtimes.NETFramework | Runtimes.NETCore | Runtimes.None)]
         public void IsMono_TrueOnMono()
         {
             Assert.True(TestPlatformHelper.IsMono);

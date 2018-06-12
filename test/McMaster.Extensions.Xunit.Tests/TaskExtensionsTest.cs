@@ -12,7 +12,8 @@ namespace McMaster.Extensions.Xunit
         [Fact]
         public async Task TimeoutAfterTest()
         {
-            await Assert.ThrowsAsync<TimeoutException>(async () => await Task.Delay(1000).TimeoutAfter(TimeSpan.FromMilliseconds(50)));
+            await Assert.ThrowsAsync<TimeoutException>(async () =>
+                await Task.Delay(1000).TimeoutAfter(TimeSpan.FromMilliseconds(50)));
         }
     }
 }

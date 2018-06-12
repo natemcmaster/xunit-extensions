@@ -3,15 +3,16 @@
 
 using System.Runtime.CompilerServices;
 
+// ReSharper disable once CheckNamespace
 namespace System.Threading.Tasks
 {
     /// <summary>
-    /// Useful extension for writing async tests.
+    ///     Useful extension for writing async tests.
     /// </summary>
     public static class TaskExtensions
     {
         /// <summary>
-        /// Timeout this task after waigin for a set amount of time.
+        ///     Timeout this task after waigin for a set amount of time.
         /// </summary>
         /// <typeparam name="T"></typeparam>
         /// <param name="task"></param>
@@ -24,10 +25,7 @@ namespace System.Threading.Tasks
             [CallerLineNumber] int lineNumber = default)
         {
             // Don't create a timer if the task is already completed
-            if (task.IsCompleted)
-            {
-                return await task;
-            }
+            if (task.IsCompleted) return await task;
 
             var cts = new CancellationTokenSource();
             if (task == await Task.WhenAny(task, Task.Delay(timeout, cts.Token)))
@@ -35,15 +33,13 @@ namespace System.Threading.Tasks
                 cts.Cancel();
                 return await task;
             }
-            else
-            {
-                throw new TimeoutException(
-                    CreateMessage(timeout, filePath, lineNumber));
-            }
+
+            throw new TimeoutException(
+                CreateMessage(timeout, filePath, lineNumber));
         }
 
         /// <summary>
-        /// Timeout this task after waigin for a set amount of time.
+        ///     Timeout this task after waigin for a set amount of time.
         /// </summary>
         /// <param name="task"></param>
         /// <param name="timeout">How long to wait before failing the test</param>
@@ -74,8 +70,10 @@ namespace System.Threading.Tasks
         }
 
         private static string CreateMessage(TimeSpan timeout, string filePath, int lineNumber)
-            => string.IsNullOrEmpty(filePath)
-            ? $"The operation timed out after reaching the limit of {timeout.TotalMilliseconds}ms."
-            : $"The operation at {filePath}:{lineNumber} timed out after reaching the limit of {timeout.TotalMilliseconds}ms.";
+        {
+            return string.IsNullOrEmpty(filePath)
+                ? $"The operation timed out after reaching the limit of {timeout.TotalMilliseconds}ms."
+                : $"The operation at {filePath}:{lineNumber} timed out after reaching the limit of {timeout.TotalMilliseconds}ms.";
+        }
     }
 }

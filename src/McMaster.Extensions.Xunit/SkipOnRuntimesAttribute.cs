@@ -2,20 +2,19 @@
 // Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
 
 using System;
-using McMaster.Extensions.Xunit;
 
-namespace Xunit
+namespace McMaster.Extensions.Xunit
 {
     /// <summary>
-    /// Skip this test on certain runtiem frameworks.
+    ///     Skip this test on certain runtiem frameworks.
     /// </summary>
-    [AttributeUsage(AttributeTargets.Method, AllowMultiple = false)]
+    [AttributeUsage(AttributeTargets.Method)]
     public class SkipOnRuntimesAttribute : Attribute, ITestCondition
     {
         private readonly Runtimes _skippedRuntimes;
 
         /// <summary>
-        /// Initialize an instance
+        ///     Initialize an instance
         /// </summary>
         /// <param name="skippedRuntimes"></param>
         public SkipOnRuntimesAttribute(Runtimes skippedRuntimes)
@@ -31,30 +30,19 @@ namespace Xunit
 
         private static bool CanRunOnCurrentRuntime(Runtimes skippedRuntimes)
         {
-            if (skippedRuntimes == Runtimes.None)
-            {
-                return true;
-            }
+            if (skippedRuntimes == Runtimes.None) return true;
 
-            if (TestPlatformHelper.IsCoreClr)
+            if (TestPlatformHelper.IsNETCore)
             {
-                if (skippedRuntimes.HasFlag(Runtimes.CoreCLR))
-                {
-                    return false;
-                }
+                if (skippedRuntimes.HasFlag(Runtimes.NETCore)) return false;
             }
             else
             {
                 if (skippedRuntimes.HasFlag(Runtimes.Mono) &&
                     TestPlatformHelper.IsMono)
-                {
                     return false;
-                }
 
-                if (skippedRuntimes.HasFlag(Runtimes.CLR))
-                {
-                    return false;
-                }
+                if (skippedRuntimes.HasFlag(Runtimes.NETFramework)) return false;
             }
 
             return true;

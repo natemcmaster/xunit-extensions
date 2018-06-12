@@ -5,14 +5,13 @@ using System;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices;
-using McMaster.Extensions.Xunit;
 
-namespace Xunit
+namespace McMaster.Extensions.Xunit
 {
     /// <summary>
-    /// Skip tests if this is not running inside Docker.
+    ///     Skip tests if this is not running inside Docker.
     /// </summary>
-    [AttributeUsage(AttributeTargets.Method, Inherited = true, AllowMultiple = false)]
+    [AttributeUsage(AttributeTargets.Method)]
     public sealed class SkipIfNotDockerAttribute : Attribute, ITestCondition
     {
         /// <inheritdoc />
@@ -23,17 +22,10 @@ namespace Xunit
         {
             get
             {
-                if (RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
-                {
-                    // we currently don't have a good way to detect if running in a Windows container
-                    return false;
-                }
+                if (RuntimeInformation.IsOSPlatform(OSPlatform.Windows)) return false;
 
                 const string procFile = "/proc/1/cgroup";
-                if (!File.Exists(procFile))
-                {
-                    return false;
-                }
+                if (!File.Exists(procFile)) return false;
 
                 var lines = File.ReadAllLines(procFile);
                 // typically the last line in the file is "1:name=openrc:/docker"

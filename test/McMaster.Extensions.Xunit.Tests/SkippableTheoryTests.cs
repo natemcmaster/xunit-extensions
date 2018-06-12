@@ -23,7 +23,7 @@ namespace McMaster.Extensions.Xunit
             Assert.True(false, "This test should always be skipped.");
         }
 
-        private static int _SkippableTheoryRuns = 0;
+        private static int _SkippableTheoryRuns;
 
         [SkippableTheory]
         [InlineData(0)]
@@ -35,7 +35,8 @@ namespace McMaster.Extensions.Xunit
             Assert.True(_SkippableTheoryRuns <= 2, $"Theory should run 2 times, but ran {_SkippableTheoryRuns} times.");
         }
 
-        [SkippableTheory, Trait("Color", "Blue")]
+        [SkippableTheory]
+        [Trait("Color", "Blue")]
         [InlineData(1)]
         public void ConditionalTheoriesShouldPreserveTraits(int arg)
         {
@@ -49,7 +50,7 @@ namespace McMaster.Extensions.Xunit
             Assert.True(false, "This should never run");
         }
 
-        private static int _conditionalMemberDataRuns = 0;
+        private static int _conditionalMemberDataRuns;
 
         [SkippableTheory]
         [InlineData(4)]
@@ -57,16 +58,17 @@ namespace McMaster.Extensions.Xunit
         public void ConditionalTheoriesWithMemberData(int arg)
         {
             _conditionalMemberDataRuns++;
-            Assert.True(_SkippableTheoryRuns <= 3, $"Theory should run 2 times, but ran {_conditionalMemberDataRuns} times.");
+            Assert.True(_SkippableTheoryRuns <= 3,
+                $"Theory should run 2 times, but ran {_conditionalMemberDataRuns} times.");
         }
 
         public static TheoryData<int> GetInts
-            => new TheoryData<int> { 0, 1 };
+            => new TheoryData<int> {0, 1};
 
         [SkippableTheory]
-        [SkipOnOperatingSystems(OperatingSystems.Windows)]
-        [SkipOnOperatingSystems(OperatingSystems.MacOS)]
-        [SkipOnOperatingSystems(OperatingSystems.Linux)]
+        [SkipOnOS(OS.Windows)]
+        [SkipOnOS(OS.MacOS)]
+        [SkipOnOS(OS.Linux)]
         [MemberData(nameof(GetActionTestData))]
         public void SkippableTheoryWithFuncs(Func<int, int> func)
         {
@@ -82,7 +84,7 @@ namespace McMaster.Extensions.Xunit
 
 #if NETCOREAPP2_1
         [SkippableTheory]
-        [SkipOnRuntimes(Runtimes.CLR)]
+        [SkipOnRuntimes(Runtimes.NETFramework)]
         [MemberData(nameof(GetInts))]
         public void ThisTestMustRunOnCoreCLR(int value)
         {
@@ -104,7 +106,7 @@ namespace McMaster.Extensions.Xunit
         public static TheoryData<Func<int, int>> GetActionTestData
             => new TheoryData<Func<int, int>>
             {
-                (i) => i * 1
+                i => i * 1
             };
 
         public class SkippableTheoryAsserter : IDisposable
@@ -113,7 +115,7 @@ namespace McMaster.Extensions.Xunit
 
             public void Dispose()
             {
-                Assert.True(TestRan, "If this assertion fails, a conditional theory wasn't discovered.");
+                Assert.True(TestRan, "If this assertion fails, a skippable theory wasn't discovered.");
             }
         }
 
@@ -127,13 +129,12 @@ namespace McMaster.Extensions.Xunit
 
         public static TheoryData<Skippable> SkippableData => new TheoryData<Skippable>
         {
-            new Skippable() { Data = 1 },
-            new Skippable() { Data = 2, Skip = "This row should be skipped." }
+            new Skippable {Data = 1},
+            new Skippable {Data = 2, Skip = "This row should be skipped."}
         };
 
         public class Skippable : IXunitSerializable
         {
-            public Skippable() { }
             public int Data { get; set; }
             public string Skip { get; set; }
 

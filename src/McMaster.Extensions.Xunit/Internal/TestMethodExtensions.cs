@@ -5,7 +5,7 @@ using System.Linq;
 using Xunit.Abstractions;
 using Xunit.Sdk;
 
-namespace McMaster.Extensions.Xunit
+namespace McMaster.Extensions.Xunit.Internal
 {
     internal static class TestMethodExtensions
     {

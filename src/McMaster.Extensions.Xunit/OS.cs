@@ -1,21 +1,29 @@
 // Copyright (c) Nate McMaster.
 // Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
 
+using System;
+
 namespace McMaster.Extensions.Xunit
 {
     /// <summary>
-    ///     Defines a test condition which must be met before a test can be run.
+    ///     Operating systems
     /// </summary>
-    public interface ITestCondition
+    [Flags]
+    public enum OS
     {
         /// <summary>
-        ///     Is the test condition satisifed?
+        ///     Linux
         /// </summary>
-        bool IsMet { get; }
+        Linux = 1,
 
         /// <summary>
-        ///     The reason the test condition was not met.
+        ///     macOS
         /// </summary>
-        string SkipReason { get; }
+        MacOS = 2,
+
+        /// <summary>
+        ///     Windows
+        /// </summary>
+        Windows = 4
     }
 }

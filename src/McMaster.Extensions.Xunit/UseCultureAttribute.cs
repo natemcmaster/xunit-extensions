@@ -7,19 +7,19 @@ using System.Reflection;
 using System.Threading;
 using Xunit.Sdk;
 
-namespace Xunit
+namespace McMaster.Extensions.Xunit
 {
     /// <summary>
-    /// Replaces the current culture and UI culture for the test.
+    ///     Replaces the current culture and UI culture for the test.
     /// </summary>
-    [AttributeUsage(AttributeTargets.Method, AllowMultiple = false)]
+    [AttributeUsage(AttributeTargets.Method)]
     public class UseCultureAttribute : BeforeAfterTestAttribute
     {
         private CultureInfo _originalCulture;
         private CultureInfo _originalUICulture;
 
         /// <summary>
-        /// Replaces the current culture with invariant culture.
+        ///     Replaces the current culture with invariant culture.
         /// </summary>
         public UseCultureAttribute()
             : this(CultureInfo.InvariantCulture)
@@ -27,7 +27,7 @@ namespace Xunit
         }
 
         /// <summary>
-        /// Replaces the thread culture based on specified values.
+        ///     Replaces the thread culture based on specified values.
         /// </summary>
         public UseCultureAttribute(string culture)
             : this(culture, culture)
@@ -35,7 +35,7 @@ namespace Xunit
         }
 
         /// <summary>
-        /// Replaces the current culture and UI culture based on specified values.
+        ///     Replaces the current culture and UI culture based on specified values.
         /// </summary>
         public UseCultureAttribute(string testCulture, string testUICulture)
         {
@@ -44,7 +44,7 @@ namespace Xunit
         }
 
         /// <summary>
-        /// Replaces the current culture and UI culture based on specified values.
+        ///     Replaces the current culture and UI culture based on specified values.
         /// </summary>
         public UseCultureAttribute(CultureInfo culture)
         {
@@ -53,12 +53,12 @@ namespace Xunit
         }
 
         /// <summary>
-        /// The <see cref="CultureInfo.CurrentCulture"/> for the test. Defaults to en-US.
+        ///     The <see cref="CultureInfo.CurrentCulture" /> for the test. Defaults to en-US.
         /// </summary>
         public CultureInfo Culture { get; }
 
         /// <summary>
-        /// The <see cref="CultureInfo.CurrentUICulture"/> for the test. Defaults to en-US.
+        ///     The <see cref="CultureInfo.CurrentUICulture" /> for the test. Defaults to en-US.
         /// </summary>
         public CultureInfo UICulture { get; }
 
@@ -86,4 +86,3 @@ namespace Xunit
         }
     }
 }
-

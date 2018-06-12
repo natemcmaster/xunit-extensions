@@ -9,6 +9,31 @@ namespace McMaster.Extensions.Xunit
     public class UseCultureAttributeTests
     {
         [Fact]
+        public void BeforeAndAfterTest_ReplacesCulture()
+        {
+            // Arrange
+            var originalCulture = CultureInfo.CurrentCulture;
+            var originalUICulture = CultureInfo.CurrentUICulture;
+            var culture = "de-DE";
+            var uiCulture = "fr-CA";
+            var replaceCulture = new UseCultureAttribute(culture, uiCulture);
+
+            // Act
+            replaceCulture.Before(null);
+
+            // Assert
+            Assert.Equal(new CultureInfo(culture), CultureInfo.CurrentCulture);
+            Assert.Equal(new CultureInfo(uiCulture), CultureInfo.CurrentUICulture);
+
+            // Act
+            replaceCulture.After(null);
+
+            // Assert
+            Assert.Equal(originalCulture, CultureInfo.CurrentCulture);
+            Assert.Equal(originalUICulture, CultureInfo.CurrentUICulture);
+        }
+
+        [Fact]
         public void UsesSuppliedCultureAndUICulture()
         {
             // Arrange
@@ -21,31 +46,6 @@ namespace McMaster.Extensions.Xunit
             // Assert
             Assert.Equal(new CultureInfo(culture), replaceCulture.Culture);
             Assert.Equal(new CultureInfo(uiCulture), replaceCulture.UICulture);
-        }
-
-        [Fact]
-        public void BeforeAndAfterTest_ReplacesCulture()
-        {
-            // Arrange
-            var originalCulture = CultureInfo.CurrentCulture;
-            var originalUICulture = CultureInfo.CurrentUICulture;
-            var culture = "de-DE";
-            var uiCulture = "fr-CA";
-            var replaceCulture = new UseCultureAttribute(culture, uiCulture);
-
-            // Act
-            replaceCulture.Before(methodUnderTest: null);
-
-            // Assert
-            Assert.Equal(new CultureInfo(culture), CultureInfo.CurrentCulture);
-            Assert.Equal(new CultureInfo(uiCulture), CultureInfo.CurrentUICulture);
-
-            // Act
-            replaceCulture.After(methodUnderTest: null);
-
-            // Assert
-            Assert.Equal(originalCulture, CultureInfo.CurrentCulture);
-            Assert.Equal(originalUICulture, CultureInfo.CurrentUICulture);
         }
     }
 }

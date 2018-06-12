@@ -30,7 +30,7 @@ namespace McMaster.Extensions.Xunit
 
 #if NETCOREAPP2_1
         [SkippableFact]
-        [SkipOnRuntimes(Runtimes.CLR)]
+        [SkipOnRuntimes(Runtimes.NETFramework)]
         public void ThisTestMustRunOnCoreCLR()
         {
             Asserter.TestRan = true;
@@ -52,7 +52,7 @@ namespace McMaster.Extensions.Xunit
 
             public void Dispose()
             {
-                Assert.True(TestRan, "If this assertion fails, a conditional fact wasn't discovered.");
+                Assert.True(TestRan, "If this assertion fails, a skippable fact wasn't discovered.");
             }
         }
     }

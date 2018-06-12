@@ -5,32 +5,44 @@ using System;
 using Xunit.Abstractions;
 using Xunit.Sdk;
 
-namespace McMaster.Extensions.Xunit
+namespace McMaster.Extensions.Xunit.Internal
 {
-    public class SkippedTestCase : XunitTestCase
+    /// <summary>
+    /// A test case that will be skipped
+    /// </summary>
+    internal class SkippedTestCase : XunitTestCase
     {
         private string _skipReason;
 
-        [Obsolete("Called by the de-serializer; should only be called by deriving classes for de-serialization purposes")]
-        public SkippedTestCase() : base()
+        /// <inheritdoc />
+        [Obsolete(
+            "Called by the de-serializer; should only be called by deriving classes for de-serialization purposes")]
+        public SkippedTestCase()
         {
         }
 
-        public SkippedTestCase(string skipReason, IMessageSink diagnosticMessageSink, TestMethodDisplay defaultMethodDisplay, ITestMethod testMethod, object[] testMethodArguments = null)
+        /// <inheritdoc />
+        public SkippedTestCase(string skipReason, IMessageSink diagnosticMessageSink,
+            TestMethodDisplay defaultMethodDisplay, ITestMethod testMethod, object[] testMethodArguments = null)
             : base(diagnosticMessageSink, defaultMethodDisplay, testMethod, testMethodArguments)
         {
             _skipReason = skipReason;
         }
 
+        /// <inheritdoc />
         protected override string GetSkipReason(IAttributeInfo factAttribute)
-            => _skipReason ?? base.GetSkipReason(factAttribute);
+        {
+            return _skipReason ?? base.GetSkipReason(factAttribute);
+        }
 
+        /// <inheritdoc />
         public override void Deserialize(IXunitSerializationInfo data)
         {
             base.Deserialize(data);
             _skipReason = data.GetValue<string>(nameof(_skipReason));
         }
 
+        /// <inheritdoc />
         public override void Serialize(IXunitSerializationInfo data)
         {
             base.Serialize(data);
