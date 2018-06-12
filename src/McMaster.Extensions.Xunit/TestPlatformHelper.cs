@@ -44,7 +44,7 @@ namespace McMaster.Extensions.Xunit
         /// <summary>
         ///     Currently running on Windows
         /// </summary>
-        public static bool IsMac =>
+        public static bool IsMacOS =>
             RuntimeInformation.IsOSPlatform(OSPlatform.OSX);
     }
 }

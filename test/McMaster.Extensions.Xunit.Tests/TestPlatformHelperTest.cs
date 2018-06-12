@@ -13,7 +13,7 @@ namespace McMaster.Extensions.Xunit
         public void IsLinux_TrueOnLinux()
         {
             Assert.True(TestPlatformHelper.IsLinux);
-            Assert.False(TestPlatformHelper.IsMac);
+            Assert.False(TestPlatformHelper.IsMacOS);
             Assert.False(TestPlatformHelper.IsWindows);
         }
 
@@ -23,7 +23,7 @@ namespace McMaster.Extensions.Xunit
         public void IsMac_TrueOnMac()
         {
             Assert.False(TestPlatformHelper.IsLinux);
-            Assert.True(TestPlatformHelper.IsMac);
+            Assert.True(TestPlatformHelper.IsMacOS);
             Assert.False(TestPlatformHelper.IsWindows);
         }
 
@@ -33,7 +33,7 @@ namespace McMaster.Extensions.Xunit
         public void IsWindows_TrueOnWindows()
         {
             Assert.False(TestPlatformHelper.IsLinux);
-            Assert.False(TestPlatformHelper.IsMac);
+            Assert.False(TestPlatformHelper.IsMacOS);
             Assert.True(TestPlatformHelper.IsWindows);
         }
 

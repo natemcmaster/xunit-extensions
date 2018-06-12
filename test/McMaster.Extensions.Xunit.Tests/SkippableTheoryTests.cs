@@ -23,7 +23,7 @@ namespace McMaster.Extensions.Xunit
             Assert.True(false, "This test should always be skipped.");
         }
 
-        private static int _SkippableTheoryRuns;
+        private static int _skippableTheoryRuns;
 
         [SkippableTheory]
         [InlineData(0)]
@@ -31,8 +31,8 @@ namespace McMaster.Extensions.Xunit
         [InlineData(2, Skip = "Skip these data")]
         public void SkippableTheoryRunOncePerDataLine(int arg)
         {
-            _SkippableTheoryRuns++;
-            Assert.True(_SkippableTheoryRuns <= 2, $"Theory should run 2 times, but ran {_SkippableTheoryRuns} times.");
+            _skippableTheoryRuns++;
+            Assert.True(_skippableTheoryRuns <= 2, $"Theory should run 2 times, but ran {_skippableTheoryRuns} times.");
         }
 
         [SkippableTheory]
@@ -58,7 +58,7 @@ namespace McMaster.Extensions.Xunit
         public void ConditionalTheoriesWithMemberData(int arg)
         {
             _conditionalMemberDataRuns++;
-            Assert.True(_SkippableTheoryRuns <= 3,
+            Assert.True(_skippableTheoryRuns <= 3,
                 $"Theory should run 2 times, but ran {_conditionalMemberDataRuns} times.");
         }
 
