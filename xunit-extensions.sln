@@ -1,0 +1,69 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.26124.0
+MinimumVisualStudioVersion = 15.0.26124.0
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{6D5CFCED-5025-474B-A04F-7C4B36073A1F}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "McMaster.Extensions.Xunit", "src\McMaster.Extensions.Xunit\McMaster.Extensions.Xunit.csproj", "{48A5388D-F6A4-4E51-A095-33ACAD9507EB}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "test", "test", "{C692845B-4980-4860-96C7-A89164A68D36}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "McMaster.Extensions.Xunit.Tests", "test\McMaster.Extensions.Xunit.Tests\McMaster.Extensions.Xunit.Tests.csproj", "{4692CB12-304C-46AB-B381-8BC056EFF889}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{9646D585-7480-41C8-AF7B-643E9C24FE6B}"
+	ProjectSection(SolutionItems) = preProject
+		.appveyor.yml = .appveyor.yml
+		.gitignore = .gitignore
+		Directory.Build.props = Directory.Build.props
+		README.md = README.md
+		version.props = version.props
+		xunit-extensions.sln.licenseheader = xunit-extensions.sln.licenseheader
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Debug|x64 = Debug|x64
+		Debug|x86 = Debug|x86
+		Release|Any CPU = Release|Any CPU
+		Release|x64 = Release|x64
+		Release|x86 = Release|x86
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{48A5388D-F6A4-4E51-A095-33ACAD9507EB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{48A5388D-F6A4-4E51-A095-33ACAD9507EB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{48A5388D-F6A4-4E51-A095-33ACAD9507EB}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{48A5388D-F6A4-4E51-A095-33ACAD9507EB}.Debug|x64.Build.0 = Debug|Any CPU
+		{48A5388D-F6A4-4E51-A095-33ACAD9507EB}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{48A5388D-F6A4-4E51-A095-33ACAD9507EB}.Debug|x86.Build.0 = Debug|Any CPU
+		{48A5388D-F6A4-4E51-A095-33ACAD9507EB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{48A5388D-F6A4-4E51-A095-33ACAD9507EB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{48A5388D-F6A4-4E51-A095-33ACAD9507EB}.Release|x64.ActiveCfg = Release|Any CPU
+		{48A5388D-F6A4-4E51-A095-33ACAD9507EB}.Release|x64.Build.0 = Release|Any CPU
+		{48A5388D-F6A4-4E51-A095-33ACAD9507EB}.Release|x86.ActiveCfg = Release|Any CPU
+		{48A5388D-F6A4-4E51-A095-33ACAD9507EB}.Release|x86.Build.0 = Release|Any CPU
+		{4692CB12-304C-46AB-B381-8BC056EFF889}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4692CB12-304C-46AB-B381-8BC056EFF889}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4692CB12-304C-46AB-B381-8BC056EFF889}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{4692CB12-304C-46AB-B381-8BC056EFF889}.Debug|x64.Build.0 = Debug|Any CPU
+		{4692CB12-304C-46AB-B381-8BC056EFF889}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{4692CB12-304C-46AB-B381-8BC056EFF889}.Debug|x86.Build.0 = Debug|Any CPU
+		{4692CB12-304C-46AB-B381-8BC056EFF889}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4692CB12-304C-46AB-B381-8BC056EFF889}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4692CB12-304C-46AB-B381-8BC056EFF889}.Release|x64.ActiveCfg = Release|Any CPU
+		{4692CB12-304C-46AB-B381-8BC056EFF889}.Release|x64.Build.0 = Release|Any CPU
+		{4692CB12-304C-46AB-B381-8BC056EFF889}.Release|x86.ActiveCfg = Release|Any CPU
+		{4692CB12-304C-46AB-B381-8BC056EFF889}.Release|x86.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{48A5388D-F6A4-4E51-A095-33ACAD9507EB} = {6D5CFCED-5025-474B-A04F-7C4B36073A1F}
+		{4692CB12-304C-46AB-B381-8BC056EFF889} = {C692845B-4980-4860-96C7-A89164A68D36}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {8832EFE0-0309-494B-96AA-09F82AD10546}
+	EndGlobalSection
+EndGlobal
