@@ -7,7 +7,15 @@
     <Description>Extensions and utilities for XUnit.NET test projects
     
 This includes API for making tests dynamically skippable, asserting timeouts on async tasks, and other helpful utilities.
+
+Commonly used types:
+McMaster.Extensions.Xunit.SkippableFact
+McMaster.Extensions.Xunit.SkippableTheory
     </Description>
+    <IsPackable>true</IsPackable>
+    <PackageTags>xunit;testing</PackageTags>
+    <IncludeSymbols>true</IncludeSymbols>
+    <IncludeSource>true</IncludeSource>
   </PropertyGroup>
   
   <ItemGroup>
@@ -15,5 +23,9 @@ This includes API for making tests dynamically skippable, asserting timeouts on 
     <PackageReference Include="xunit.extensibility.core" Version="2.3.1" />
     <PackageReference Include="xunit.extensibility.execution" Version="2.3.1" />
   </ItemGroup>
-  
+
+  <ItemGroup>
+    <PackageReference Include="SourceLink.Create.CommandLine" Version="2.8.0" PrivateAssets="all" />
+  </ItemGroup>
+
 </Project>
