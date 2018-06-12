@@ -1,7 +1,30 @@
 Xunit Extensions
 ================
 
-This repo contains a class library for common things I want to do in Xunit tests.
+[![Travis build status][travis-badge]](https://travis-ci.org/natemcmaster/xunit-extensions/branches)
+[![AppVeyor build status][appveyor-badge]](https://ci.appveyor.com/project/natemcmaster/xunit-extensions/branch/master)
+
+[travis-badge]: https://img.shields.io/travis/natemcmaster/xunit-extensions/master.svg?label=travis&style=flat-square
+[appveyor-badge]: https://img.shields.io/appveyor/ci/natemcmaster/xunit-extensions/master.svg?label=appveyor&style=flat-square
+
+[![NuGet][main-nuget-badge]][main-nuget] [![MyGet][main-myget-badge]][main-myget]
+
+[main-nuget]: https://www.nuget.org/packages/McMaster.Extensions.Xunit/
+[main-nuget-badge]: https://img.shields.io/nuget/v/McMaster.Extensions.Xunit.svg?style=flat-square&label=nuget
+[main-myget]: https://www.myget.org/feed/natemcmaster/package/nuget/McMaster.Extensions.Xunit
+[main-myget-badge]: https://img.shields.io/www.myget/natemcmaster/vpre/McMaster.Extensions.Xunit.svg?style=flat-square&label=myget
+
+
+This repo contains a class library of utilties and helpers for writing tests with XUnit.NET.
+
+## Getting started
+
+Install this as a NuGet package using your favorite IDE.
+
+```
+Install-Package McMaster.Extensions.Xunit
+dotnet add package McMaster.Extensions.Xunit
+```
 
 ## Dynamically skip tests
 
