@@ -1,8 +1,12 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <TargetFramework>netstandard2.0</TargetFramework>
+    <TargetFrameworks>netstandard2.0</TargetFrameworks>
+    <TargetFrameworks Condition="'$(OS)' == 'Windows_NT'">$(TargetFrameworks);net452</TargetFrameworks>
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
-    <WarningsNotAsErrors>CS1591</WarningsNotAsErrors>
+    <Description>Extensions and utilities for XUnit.NET test projects
+    
+This includes API for making tests dynamically skippable, asserting timeouts on async tasks, and other helpful utilities.
+    </Description>
   </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="xunit.extensibility.core" Version="2.3.1" />
