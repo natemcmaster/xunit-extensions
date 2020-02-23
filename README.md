@@ -15,7 +15,7 @@ Xunit Extensions
 [main-myget-badge]: https://img.shields.io/www.myget/natemcmaster/vpre/McMaster.Extensions.Xunit.svg?style=flat-square&label=myget
 
 
-This repo contains a class library of utilties and helpers for writing tests with XUnit.NET.
+This repo contains a class library of utilities and helpers for writing tests with XUnit.NET.
 
 ## Getting started
 
