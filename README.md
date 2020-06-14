@@ -2,10 +2,10 @@ Xunit Extensions
 ================
 
 [![Travis build status][travis-badge]](https://travis-ci.org/natemcmaster/xunit-extensions/branches)
-[![AppVeyor build status][appveyor-badge]](https://ci.appveyor.com/project/natemcmaster/xunit-extensions/branch/master)
+[![AppVeyor build status][appveyor-badge]](https://ci.appveyor.com/project/natemcmaster/xunit-extensions/branch/main)
 
-[travis-badge]: https://img.shields.io/travis/natemcmaster/xunit-extensions/master.svg?label=travis&style=flat-square
-[appveyor-badge]: https://img.shields.io/appveyor/ci/natemcmaster/xunit-extensions/master.svg?label=appveyor&style=flat-square
+[travis-badge]: https://img.shields.io/travis/natemcmaster/xunit-extensions/main.svg?label=travis&style=flat-square
+[appveyor-badge]: https://img.shields.io/appveyor/ci/natemcmaster/xunit-extensions/main.svg?label=appveyor&style=flat-square
 
 [![NuGet][main-nuget-badge]][main-nuget] [![MyGet][main-myget-badge]][main-myget]
 
