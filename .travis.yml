@@ -9,5 +9,5 @@ script:
   - ./build.ps1
 branches:
   only:
-    - master
+    - main
     - travis
